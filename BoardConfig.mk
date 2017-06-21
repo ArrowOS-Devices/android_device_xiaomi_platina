@@ -135,6 +135,17 @@ BOARD_USES_QCNE := true
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
 
+# Enable dex pre-opt to speed up initial boot
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+    endif
+  endif
+endif
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
+
 # Display
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
