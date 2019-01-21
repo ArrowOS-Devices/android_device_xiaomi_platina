@@ -28,43 +28,34 @@ import android.support.v7.preference.PreferenceCategory;
 public class DeviceSettings extends PreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String PREF_ENABLE_HAL3 = "hal3";
-    private static final String PREF_ENABLE_EIS = "eis";
-    final static String PREF_ENABLE_FPACTION = "fpaction_enabled";
-    final static String PREF_FP_SHUTTER = "fp_shutter";
-    final static String PREF_FPACTION = "fpaction";
-    final static String PREF_TORCH_BRIGHTNESS = "torch_brightness";
-    final static String PREF_VIBRATION_STRENGTH = "vibration_strength";
-    private static final String CATEGORY_DISPLAY = "display";
-    private static final String PREF_DEVICE_DOZE = "device_doze";
-    private static final String PREF_DEVICE_KCAL = "device_kcal";
-    private static final String PREF_SPECTRUM = "spectrum";
-    private static final String PREF_ENABLE_DIRAC = "dirac_enabled";
-    private static final String PREF_HEADSET = "dirac_headset_pref";
-    private static final String PREF_PRESET = "dirac_preset_pref";
+    private final String ENABLE_HAL3_KEY = "hal3";
+    private final String ENABLE_EIS_KEY = "eis";
+    final static String ENABLE_FPACTION_KEY = "fpaction_enabled";
+    final static String FP_SHUTTER_KEY = "fp_shutter";
+    final static String FPACTION_KEY = "fpaction";
+    final static String TORCH_BRIGHTNESS_KEY = "torch_brightness";
+    final static String VIBRATION_STRENGTH_KEY = "vibration_strength";
+    private final String SPECTRUM_KEY = "spectrum";
 
-    private static final String HAL3_SYSTEM_PROPERTY = "persist.camera.HAL3.enabled";
-    private static final String EIS_SYSTEM_PROPERTY = "persist.camera.eis.enable";
-    private static final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
+    private final String HAL3_SYSTEM_PROPERTY = "persist.camera.HAL3.enabled";
+    private final String EIS_SYSTEM_PROPERTY = "persist.camera.eis.enable";
+    private final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
 
-    private final static String TORCH_1_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" +
-            "spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_0/max_brightness";
-    private final static String TORCH_2_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" +
-            "spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_1/max_brightness";
-    private final static String VIBRATION_STRENGTH_PATH = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
+    final static String TORCH_1_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_0/max_brightness";
+    final static String TORCH_2_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_1/max_brightness";
+    final static String VIBRATION_STRENGTH_PATH = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
 
-    private static final String DEVICE_DOZE_PACKAGE_NAME = "org.lineageos.settings.doze";
-    private static final String DEVICE_KCAL_PACKAGE_NAME = "org.lineageos.settings.kcal";
-
-    // value of vtg_min and vtg_max
-    final static int MIN_VIBRATION = 116;
-    final static int MAX_VIBRATION = 3596;
+    private final String KEY_CATEGORY_DISPLAY = "display";
+    private final String KEY_DEVICE_DOZE = "device_doze";
+    private final String KEY_DEVICE_DOZE_PACKAGE_NAME = "org.lineageos.settings.doze";
+    private final String KEY_DEVICE_KCAL = "device_kcal";
+    private final String KEY_DEVICE_KCAL_PACKAGE_NAME = "org.lineageos.settings.kcal";
 
     private SwitchPreference mEnableHAL3;
     private SwitchPreference mEnableEIS;
-    private SwitchPreference mEnableFpAction;
-    private SwitchPreference mFpShutter;
-    private ListPreference mFpAction;
+    static SwitchPreference mEnableFpAction;
+    static SwitchPreference mFpShutter;
+    static ListPreference mFpAction;
     private TorchSeekBarPreference mTorchBrightness;
     private VibrationSeekBarPreference mVibrationStrength;
     private ListPreference mSPECTRUM;
@@ -84,19 +75,18 @@ public class DeviceSettings extends PreferenceFragment implements
         mEnableEIS.setChecked(FileUtils.getProp(EIS_SYSTEM_PROPERTY, false));
         mEnableEIS.setOnPreferenceChangeListener(this);
 
-        mEnableFpAction = (SwitchPreference) findPreference(PREF_ENABLE_FPACTION);
+        mEnableFpAction = (SwitchPreference) findPreference(ENABLE_FPACTION_KEY);
         mEnableFpAction.setOnPreferenceChangeListener(this);
 
-        mFpShutter = (SwitchPreference) findPreference(PREF_FP_SHUTTER);
+        mFpShutter = (SwitchPreference) findPreference(FP_SHUTTER_KEY);
         mFpShutter.setOnPreferenceChangeListener(this);
 
-        mFpAction = (ListPreference) findPreference(PREF_FPACTION);
+        mFpAction = (ListPreference) findPreference(FPACTION_KEY);
         mFpAction.setSummary(mFpAction.getEntry());
         mFpAction.setOnPreferenceChangeListener(this);
 
-        mTorchBrightness = (TorchSeekBarPreference) findPreference(PREF_TORCH_BRIGHTNESS);
-        mTorchBrightness.setEnabled(FileUtils.fileWritable(TORCH_1_BRIGHTNESS_PATH) &&
-                FileUtils.fileWritable(TORCH_2_BRIGHTNESS_PATH));
+        mTorchBrightness = (TorchSeekBarPreference) findPreference(TORCH_BRIGHTNESS_KEY);
+        mTorchBrightness.setEnabled(FileUtils.fileWritable(TORCH_1_BRIGHTNESS_PATH) && FileUtils.fileWritable(TORCH_2_BRIGHTNESS_PATH));
         mTorchBrightness.setOnPreferenceChangeListener(this);
 
         mVibrationStrength = (VibrationSeekBarPreference) findPreference(PREF_VIBRATION_STRENGTH);
@@ -156,16 +146,23 @@ public class DeviceSettings extends PreferenceFragment implements
                 FileUtils.setProp(EIS_SYSTEM_PROPERTY, (Boolean) value);
                 break;
 
-            case PREF_ENABLE_FPACTION:
+            case ENABLE_FPACTION_KEY:
+                mEnableFpAction.setChecked((Boolean) value);
                 mFpAction.setEnabled((Boolean) value);
+                mFpShutter.setEnabled((Boolean) value);
                 break;
 
-            case PREF_FPACTION:
+            case FP_SHUTTER_KEY:
+                mFpShutter.setChecked((Boolean) value);
+                break;
+
+            case FPACTION_KEY:
                 mFpAction.setValue((String) value);
                 mFpAction.setSummary(mFpAction.getEntry());
                 break;
 
-            case PREF_TORCH_BRIGHTNESS:
+            case TORCH_BRIGHTNESS_KEY:
+                mTorchBrightness.setValue((int) value);
                 FileUtils.setValue(TORCH_1_BRIGHTNESS_PATH, (int) value);
                 FileUtils.setValue(TORCH_2_BRIGHTNESS_PATH, (int) value);
                 break;
@@ -175,7 +172,7 @@ public class DeviceSettings extends PreferenceFragment implements
                 FileUtils.setValue(VIBRATION_STRENGTH_PATH, vibrationValue);
                 break;
 
-            case PREF_SPECTRUM:
+            case SPECTRUM_KEY:
                 mSPECTRUM.setValue((String) value);
                 mSPECTRUM.setSummary(mSPECTRUM.getEntry());
                 FileUtils.setStringProp(SPECTRUM_SYSTEM_PROPERTY, (String) value);
