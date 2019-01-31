@@ -479,3 +479,7 @@ PRODUCT_PACKAGES += \
 # KCal
 PRODUCT_PACKAGES += \
 	KCal
+
+# KeyHandler
+PRODUCT_PACKAGES += \
+	org.lineageos.keyhandler

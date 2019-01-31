@@ -24,12 +24,15 @@ import android.view.MenuItem;
 public class DeviceSettingsActivity extends Activity {
 
     private DeviceSettings mDeviceSettingsFragment;
+    private static Context sContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        sContext = this.getApplicationContext();
 
         Fragment fragment = getFragmentManager().findFragmentById(android.R.id.content);
         if (fragment == null) {
@@ -53,4 +56,9 @@ public class DeviceSettingsActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    static Context getContext() {
+        return sContext;
+    }
+
 }
