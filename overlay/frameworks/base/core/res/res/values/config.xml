@@ -518,11 +518,6 @@
           To facilitate writing device-independent emulation overlays, the marker `@dp` can be
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results. -->
-    <string translatable="false" name="config_mainBuiltInDisplayCutout">M -150,0 L -150,88 L 150,88 L 150,0 Z</string>
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">78.0px</dimen>
-    <dimen name="status_bar_height_landscape">24.0dp</dimen>
-
     <!-- Whether device ignores the RSSNR signal implementation -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
 
@@ -530,4 +525,3 @@
     <bool name="config_haveHigherAspectRatioScreen">true</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 </resources>
-
