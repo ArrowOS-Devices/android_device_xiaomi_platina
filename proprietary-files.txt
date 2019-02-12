@@ -56,14 +56,13 @@ vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
 vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
-
-# AptX - from Nokia 7 Plus Onyx_00WW-user 9 PPR1.180610.011 00WW_3_22C release-keys
 vendor/lib64/libaptX_encoder.so|22f5749edb5099526788c22708099a7791dd837f
 vendor/lib64/libaptXHD_encoder.so|c4ad4d6d7615f7df3ea1a4be5c6dae8a8c8ee8b1
 
 # Audio
 vendor/bin/audioflacapp
 vendor/bin/capture.sh
+vendor/etc/audio.bsd
 vendor/firmware/dbmd4_va_fw.bin
 vendor/firmware/tfa98xx_aac.cnt
 vendor/firmware/tfa98xx_goer.cnt
@@ -83,6 +82,9 @@ vendor/lib/libdrc.so
 vendor/lib/libqtigef.so
 vendor/lib/libsurround_3mic_proc.so
 vendor/lib/libtinycompress_vendor.so
+vendor/lib/libqcbor.so
+vendor/lib/libnwa.so
+vendor/lib/libsse.so
 vendor/lib/soundfx/libasphere.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
@@ -99,6 +101,9 @@ vendor/lib64/libaudioparsers.so
 vendor/lib64/libaudioroute_ext.so
 vendor/lib64/libqtigef.so
 vendor/lib64/libtinycompress_vendor.so
+vendor/lib64/libqcbor.so
+vendor/lib64/libnwa.so
+vendor/lib64/libsse.so
 vendor/lib64/soundfx/libasphere.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcvirt.so
@@ -114,6 +119,12 @@ vendor/etc/acdbdata/Forte/Forte_Headset_cal.acdb
 vendor/etc/acdbdata/Forte/Forte_Speaker_cal.acdb
 vendor/etc/acdbdata/Forte/Forte_workspaceFile.qwsp
 
+# Dirac
+vendor/etc/diracmobile.config
+vendor/lib/libDiracAPI_SHARED.so
+vendor/lib/soundfx/libdirac.so
+vendor/lib/soundfx/libdynproc.so
+vendor/lib64/soundfx/libdynproc.so
 
 # Bluetooth
 vendor/bin/btnvtool
@@ -228,7 +239,6 @@ vendor/lib/libFaceGrade.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libhal_dbg.so
 vendor/lib/libhdr_tm.so
-vendor/lib/libmmcamera_platina_imx576_sunny.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
@@ -467,6 +477,7 @@ vendor/lib/libmmcamera_truly_cma481_eeprom.so
 vendor/lib/libmmcamera_truly_cmb433_eeprom.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
+
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
 vendor/lib/libactuator_ad5823.so
@@ -2006,6 +2017,7 @@ vendor/etc/csot_fhd_video_dsi_panel_mi.xml
 vendor/etc/tianma_fhd_video_dsi_panel_mi.xml
 vendor/etc/sdr_config.cfg
 vendor/etc/hdr_config.cfg
+
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
@@ -2049,8 +2061,12 @@ vendor/lib64/libtzdrmgenprov.so
 vendor/bin/hw/android.hardware.drm@1.1-service.widevine
 vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc
 vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/libhdcpsrm.so
+vendor/lib/libcpion.so
 vendor/lib64/libwvhidl.so
 vendor/lib64/mediadrm/libwvdrmengine.so
+vendor/lib64/libcpion.so
+vendor/lib64/libhdcpsrm.so
 
 # ESE-Powermanager
 vendor/bin/hw/vendor.qti.esepowermanager@1.0-service
@@ -2205,6 +2221,7 @@ vendor/lib/libOpenCL.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
+
 # Graphics (SDM)
 vendor/lib/libqseed3.so
 vendor/lib/libsdm-color.so
@@ -2328,6 +2345,10 @@ vendor/bin/mlipayd@1.1
 vendor/lib64/libmlipay@1.1.so
 
 # Perf
+lib/vendor.qti.hardware.iop@1.0.so
+lib/vendor.qti.hardware.iop@2.0.so
+lib64/vendor.qti.hardware.iop@1.0.so
+lib64/vendor.qti.hardware.iop@2.0.so
 vendor/bin/energy-awareness
 vendor/bin/msm_irqbalance
 vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
@@ -2338,13 +2359,38 @@ vendor/lib/libqti-perfd-client.so
 vendor/lib/libqti-perfd.so
 vendor/lib/libqti-util.so
 vendor/lib/libqti-utils.so
+vendor/lib/libqti-iopd-client.so
 vendor/lib/vendor.qti.hardware.perf@1.0.so
+vendor/lib/hw/vendor.qti.hardware.iop@2.0-impl.so
+vendor/lib/vendor.qti.hardware.iop@1.0.so
+vendor/lib/vendor.qti.hardware.iop@2.0.so
 vendor/lib64/libperfgluelayer.so
 vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libqti-perfd.so
 vendor/lib64/libqti-util.so
 vendor/lib64/libqti-utils.so
 vendor/lib64/vendor.qti.hardware.perf@1.0.so
+vendor/lib64/libqti-iopd-client.so
+vendor/lib64/vendor.qti.hardware.iop@1.0.so
+vendor/lib64/vendor.qti.hardware.iop@2.0.so
+vendor/lib64/hw/vendor.qti.hardware.iop@2.0-impl.so
+
+# QTI Performance libs
+-framework/QPerformance.jar
+-framework/UxPerformance.jar
+bin/perfservice
+etc/init/perfservice.rc
+etc/perf/whitelistedapps.xml
+lib/libqti-at.so
+lib/libqti-perfd-client_system.so
+lib/libqti-iopd-client_system.so
+lib/libqti-util_system.so
+lib/libqti_performance.so
+lib64/libqti-at.so
+lib64/libqti-perfd-client_system.so
+lib64/libqti-iopd-client_system.so
+lib64/libqti-util_system.so
+lib64/libqti_performance.so
 
 # Peripheral manager
 vendor/bin/pm-proxy
@@ -2459,7 +2505,7 @@ vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.am@1.0.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - IMS 
+# IMS
 -priv-app/ims/ims.apk
 -app/imssettings/imssettings.apk:vendor/app/imssettings/imssettings.apk
 etc/permissions/com.qualcomm.qti.imscmservice.xml
