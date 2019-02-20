@@ -1,11 +1,13 @@
 ## Xiaomi Mi 8 Lite device tree:
 Base: mko-mr1
 Credits:
+- @Mokee
 - @lihonglinglory
 - @Lunarixus
 - @rsyhan
-- @ManoloRey
-- @brunorochaa
+- @melvingb
+- @uvera
+- Resurrection Remix team
 And any others I have missed:P
 
 ----------------------------------------------------------------------
