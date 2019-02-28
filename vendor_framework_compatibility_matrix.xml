@@ -516,10 +516,14 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>vendor.mokee.livedisplay</name>
-        <version>1.0</version>
+        <name>vendor.lineage.livedisplay</name>
+        <version>2.0</version>
         <interface>
-            <name>IColor</name>
+            <name>IDisplayModes</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IPictureAdjustment</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -527,7 +531,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <name>vendor.mokee.power</name>
         <version>1.0</version>
         <interface>
-            <name>IMokeePower</name>
+            <name>ILineagePower</name>
             <instance>default</instance>
         </interface>
     </hal>
