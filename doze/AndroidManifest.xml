@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2015-2016 The CyanogenMod Project
-                   2017 The LineageOS Project
+<!-- Copyright (C) 2018 The Xiaomi-SDM660 Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -26,14 +24,9 @@
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
-    <uses-sdk
-        android:minSdkVersion="24"
-        android:targetSdkVersion="24"/>
-
     <application
         android:label="@string/device_settings_app_name"
         android:persistent="true">
-
         <receiver android:name=".BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -47,9 +40,11 @@
 
         <activity
             android:name=".DozeSettingsActivity"
-            android:label="@string/ambient_display_title"
+            android:label="@string/ambient_display_xiaomi"
             android:theme="@style/Theme.Main">
+            <intent-filter>
+                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+            </intent-filter>
         </activity>
-
     </application>
 </manifest>
