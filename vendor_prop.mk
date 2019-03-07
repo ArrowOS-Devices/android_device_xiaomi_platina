@@ -1,5 +1,9 @@
 # System prop from miui
 
+# Enable OpenGL Skia as default renderer
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.hwui.renderer=skiagl
+
 # Enable CAMERA2API by default in vendor
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.camera.HAL3.enabled=1 \
