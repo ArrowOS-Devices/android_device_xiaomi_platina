@@ -471,3 +471,10 @@ PRODUCT_COPY_FILES += \
 # Wi-Fi Display
 PRODUCT_BOOT_JARS += \
     WfdCommon
+
+# XiaomiParts
+PRODUCT_PACKAGES += \
+	XiaomiParts
+# KCal
+PRODUCT_PACKAGES += \
+	KCal

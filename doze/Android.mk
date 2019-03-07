@@ -22,7 +22,6 @@
 #
 
 LOCAL_PATH:= $(call my-dir)
-ifeq ($(BOARD_VENDOR_PLATFORM),xiaomi-sdm660)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
@@ -55,4 +54,3 @@ LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
-endif
