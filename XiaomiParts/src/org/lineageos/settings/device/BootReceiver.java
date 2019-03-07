@@ -33,8 +33,15 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        FileUtils.setValue(TORCH_1_BRIGHTNESS_PATH, sharedPrefs.getInt(DeviceSettings.TORCH_BRIGHTNESS_KEY, 100));
-        FileUtils.setValue(TORCH_2_BRIGHTNESS_PATH, sharedPrefs.getInt(DeviceSettings.TORCH_BRIGHTNESS_KEY, 100));
-        FileUtils.setValue(VIBRATION_STRENGTH_PATH, sharedPrefs.getInt(DeviceSettings.VIBRATION_STRENGTH_KEY, 80) / 100.0 * (DeviceSettings.MAX_VIBRATION - DeviceSettings.MIN_VIBRATION) + DeviceSettings.MIN_VIBRATION);
+        FileUtils.setValue(TORCH_1_BRIGHTNESS_PATH, sharedPrefs.getInt(
+                DeviceSettings.PREF_TORCH_BRIGHTNESS, 100));
+        FileUtils.setValue(TORCH_2_BRIGHTNESS_PATH, sharedPrefs.getInt(
+                DeviceSettings.PREF_TORCH_BRIGHTNESS, 100));
+        FileUtils.setValue(VIBRATION_STRENGTH_PATH, sharedPrefs.getInt(
+                DeviceSettings.PREF_VIBRATION_STRENGTH, 80) / 100.0 *
+                (DeviceSettings.MAX_VIBRATION - DeviceSettings.MIN_VIBRATION) +
+                DeviceSettings.MIN_VIBRATION);
+
+        context.startService(new Intent(context, DiracService.class));
     }
 }
