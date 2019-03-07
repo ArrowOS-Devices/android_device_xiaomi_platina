@@ -1,5 +1,9 @@
 # System prop from miui
 
+# Spectrum shit
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.spectrum.profile=0
+
 # Enable OpenGL Skia as default renderer
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=skiagl
