@@ -477,9 +477,6 @@ PRODUCT_BOOT_JARS += \
 # XiaomiParts
 PRODUCT_PACKAGES += \
 	XiaomiParts
-# KCal
-PRODUCT_PACKAGES += \
-	KCal
 
 # KeyHandler
 PRODUCT_PACKAGES += \
