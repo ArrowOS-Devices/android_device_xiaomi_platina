@@ -481,8 +481,3 @@ PRODUCT_PACKAGES += \
 # KeyHandler
 PRODUCT_PACKAGES += \
 	org.lineageos.keyhandler
-
-# QTI performance
-PRODUCT_BOOT_JARS += \
-    QPerformance \
-    UxPerformance
