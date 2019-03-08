@@ -16,7 +16,6 @@ persist.cam.pp.feat.mask            u:object_r:camera_prop:s0
 persist.camera.                     u:object_r:camera_prop:s0
 persist.enable.max.pending.buf      u:object_r:camera_prop:s0
 persist.partial.skip                u:object_r:camera_prop:s0
-persist.camera.eis.enable   u:object_r:camera_prop:s0
 
 # Fingerprint
 gf.debug.dump_data                  u:object_r:vendor_fp_prop:s0

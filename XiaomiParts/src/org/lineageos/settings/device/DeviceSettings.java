@@ -16,9 +16,9 @@
 
 package org.lineageos.settings.device;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -43,18 +43,19 @@ public class DeviceSettings extends PreferenceFragment implements
     private static final String PREF_HEADSET = "dirac_headset_pref";
     private static final String PREF_PRESET = "dirac_preset_pref";
 
-    private static final String HAL3_SYSTEM_PROPERTY = "persist.camera.HAL3.enabled";
-    private static final String EIS_SYSTEM_PROPERTY = "persist.camera.eis.enable";
-    private static final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
+    private static final String HAL3_SYSTEM_PROPERTY = "persist.vendor.camera.HAL3.enabled";
+    private static final String EIS_SYSTEM_PROPERTY = "persist.vendor.camera.eis.enable";
 
-    private final static String TORCH_1_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" +
+    private final static String TORCH_1_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" + "" +
             "spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_0/max_brightness";
-    private final static String TORCH_2_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" +
+    private final static String TORCH_2_BRIGHTNESS_PATH = "/sys/devices/soc/800f000.qcom,spmi/" + "" +
             "spmi-0/spmi0-03/800f000.qcom,spmi:qcom,pm660l@3:qcom,leds@d300/leds/led:torch_1/max_brightness";
     private final static String VIBRATION_STRENGTH_PATH = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
 
     private static final String DEVICE_DOZE_PACKAGE_NAME = "org.lineageos.settings.doze";
     private static final String DEVICE_KCAL_PACKAGE_NAME = "org.lineageos.settings.kcal";
+
+    private static final String SPECTRUM_SYSTEM_PROPERTY = "persist.spectrum.profile";
 
     // value of vtg_min and vtg_max
     final static int MIN_VIBRATION = 116;
@@ -72,9 +73,14 @@ public class DeviceSettings extends PreferenceFragment implements
     private ListPreference mHeadsetType;
     private ListPreference mPreset;
 
+    private DiracUtils mDiracUtils;
+    private Handler mHandler = new Handler();
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.main, rootKey);
+
+        mDiracUtils = new DiracUtils(getContext());
 
         mEnableHAL3 = (SwitchPreference) findPreference(PREF_ENABLE_HAL3);
         mEnableHAL3.setChecked(FileUtils.getProp(HAL3_SYSTEM_PROPERTY, false));
@@ -117,13 +123,7 @@ public class DeviceSettings extends PreferenceFragment implements
         mSPECTRUM.setSummary(mSPECTRUM.getEntry());
         mSPECTRUM.setOnPreferenceChangeListener(this);
 
-        boolean enhancerEnabled;
-        try {
-            enhancerEnabled = DiracService.sDiracUtils.isDiracEnabled();
-        } catch (java.lang.NullPointerException e) {
-            getContext().startService(new Intent(getContext(), DiracService.class));
-            enhancerEnabled = DiracService.sDiracUtils.isDiracEnabled();
-        }
+        boolean enhancerEnabled = mDiracUtils.isDiracEnabled();
 
         mEnableDirac = (SwitchPreference) findPreference(PREF_ENABLE_DIRAC);
         mEnableDirac.setOnPreferenceChangeListener(this);
@@ -182,32 +182,17 @@ public class DeviceSettings extends PreferenceFragment implements
                 break;
 
             case PREF_ENABLE_DIRAC:
-                try {
-                    DiracService.sDiracUtils.setEnabled((boolean) value);
-                } catch (java.lang.NullPointerException e) {
-                    getContext().startService(new Intent(getContext(), DiracService.class));
-                    DiracService.sDiracUtils.setEnabled((boolean) value);
-                }
+                mDiracUtils.setEnabled((boolean) value);
                 mHeadsetType.setEnabled((boolean) value);
                 mPreset.setEnabled((boolean) value);
                 break;
 
             case PREF_HEADSET:
-                try {
-                    DiracService.sDiracUtils.setHeadsetType(Integer.parseInt(value.toString()));
-                } catch (java.lang.NullPointerException e) {
-                    getContext().startService(new Intent(getContext(), DiracService.class));
-                    DiracService.sDiracUtils.setHeadsetType(Integer.parseInt(value.toString()));
-                }
+                mDiracUtils.setHeadsetType(Integer.parseInt(value.toString()));
                 break;
 
             case PREF_PRESET:
-                try {
-                    DiracService.sDiracUtils.setLevel(String.valueOf(value));
-                } catch (java.lang.NullPointerException e) {
-                    getContext().startService(new Intent(getContext(), DiracService.class));
-                    DiracService.sDiracUtils.setLevel(String.valueOf(value));
-                }
+                mDiracUtils.setLevel(String.valueOf(value));
                 break;
 
             default:
