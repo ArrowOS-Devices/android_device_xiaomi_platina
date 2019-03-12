@@ -372,8 +372,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.target.rc \
-    init.parts.rc \
-    init.spectrum.rc \
     ueventd.qcom.rc \
     fstab.qcom
 
@@ -473,11 +471,3 @@ PRODUCT_COPY_FILES += \
 # Wi-Fi Display
 PRODUCT_BOOT_JARS += \
     WfdCommon
-
-# XiaomiParts
-PRODUCT_PACKAGES += \
-	XiaomiParts
-
-# KeyHandler
-PRODUCT_PACKAGES += \
-	org.lineageos.keyhandler

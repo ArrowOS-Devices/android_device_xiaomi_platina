@@ -56,8 +56,6 @@ vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
 vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
-
-# AptX - from Nokia 7 Plus Onyx_00WW-user 9 PPR1.180610.011 00WW_3_22C release-keys
 vendor/lib64/libaptX_encoder.so|22f5749edb5099526788c22708099a7791dd837f
 vendor/lib64/libaptXHD_encoder.so|c4ad4d6d7615f7df3ea1a4be5c6dae8a8c8ee8b1
 
@@ -479,6 +477,7 @@ vendor/lib/libmmcamera_truly_cma481_eeprom.so
 vendor/lib/libmmcamera_truly_cmb433_eeprom.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
+
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
 vendor/lib/libactuator_ad5823.so
@@ -2018,6 +2017,7 @@ vendor/etc/csot_fhd_video_dsi_panel_mi.xml
 vendor/etc/tianma_fhd_video_dsi_panel_mi.xml
 vendor/etc/sdr_config.cfg
 vendor/etc/hdr_config.cfg
+
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
@@ -2221,6 +2221,7 @@ vendor/lib/libOpenCL.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
+
 # Graphics (SDM)
 vendor/lib/libqseed3.so
 vendor/lib/libsdm-color.so
@@ -2504,7 +2505,7 @@ vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.am@1.0.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - IMS 
+# IMS
 -priv-app/ims/ims.apk
 -app/imssettings/imssettings.apk:vendor/app/imssettings/imssettings.apk
 etc/permissions/com.qualcomm.qti.imscmservice.xml
